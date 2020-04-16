@@ -17,5 +17,6 @@ jobs:
         uses: jdidion/dxwdl-action-test@master
         with:
           wdl: hello.wdl
-          token: ${{ secrets.API_TOKEN }}
+          destination: project-FpGG6G80qpzP2PF4K2B2kzY8:/
+          api_token: ${{ secrets.API_TOKEN }}
 
