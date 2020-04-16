@@ -1,0 +1,21 @@
+name: Master Workflow
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build Workflow
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Compile main.wdl
+        uses: actions/dxwdl-compile@v0.1.0
+        with:
+          wdl: main.wdl
+          token: ${{ secrets.API_TOKEN }}
+

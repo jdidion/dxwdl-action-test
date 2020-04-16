@@ -1,0 +1,37 @@
+name: dxWDL compile
+author: DNAnexus
+description: Compile a WDL workflow with dxWDL
+inputs:
+  wdl:
+    description: The main WDL file
+    required: true
+  destination:
+    description: Destination project and folder
+    required: true
+  archive:
+    description: How to deal with existing workflows/applets (-archive or -force)
+    required: true
+    default: true
+  locked:
+    description: Create a locked workflow
+    required: true
+    default: false
+  streamAllFiles:
+    description: Mount all files with dxfuse - do not use the download agent
+    required: true
+    default: true
+  runs:
+    using: docker
+    image: docker://dnanexus/dxwdl@sha:b475c64898626c681ac81496fe287d9f822f9d27eea448793dfe04f5eca77280
+    env:
+      DX_SECURITY_CONTEXT: ${{ secrets.DX_SECURITY_CONTEXT }}
+      DX_APISERVER_PROTOCOL: ${{ secrets.DX_APISERVER_PROTOCOL }}
+      DX_APISERVER_HOST: ${{ secrets.DX_APISERVER_HOST }}
+      DX_APISERVER_PORT: ${{ secrets.DX_APISERVER_PORT }}
+    args:
+      - ${{ inputs.wdl }}
+      - -destination
+      - ${{ inputs.destination }}
+      - ${{ inputs.archive ? '-archive' | '-f' }}
+      - ${{ inputs.locked ? '-locked' | '' }}
+      - ${{ inputs.streamAllFiles ? '-streamAllFiles' | '' }}
