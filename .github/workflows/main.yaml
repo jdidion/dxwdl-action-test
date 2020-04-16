@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Compile main.wdl
-        uses: actions/dxwdl-compile@v0.1.0
+      - name: Compile hello.wdl
+        uses: .github/actions/dxwdl-compile
         with:
-          wdl: main.wdl
+          wdl: hello.wdl
           token: ${{ secrets.API_TOKEN }}
 
