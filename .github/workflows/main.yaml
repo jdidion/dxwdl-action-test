@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Compile hello.wdl
-        uses: .github/actions/dxwdl-compile
+        uses: jdidion/dxwdl-action_test/.github/actions/dxwdl-compile
         with:
           wdl: hello.wdl
           token: ${{ secrets.API_TOKEN }}
