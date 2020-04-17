@@ -8,10 +8,18 @@ inputs:
   destination:
     description: 'Destination project and folder'
     required: true
-  extra_args:
-    description: 'Additional arguments to dxWDL'
-    required: false
-    default: '-archive -streamAllFiles'
+  archive:
+    description: 'Archive existing workflows/applets (otherwise they are overwritten)'
+    required: true
+    default: 'true'
+  locked:
+    description: 'Create a locked workflow'
+    required: true
+    default: 'false'
+  streamAllFiles:
+    description: 'Mount all files with dxfuse - do not use the download agent'
+    required: true
+    default: 'true'
   api_token:
     description: 'DNAnexus API token'
     required: true
@@ -29,12 +37,17 @@ inputs:
     default: '443'
 runs:
   using: 'docker'
-  image: 'docker://dnanexus/dxwdl:latest'
+  image: 'Dockerfile'
   args:
     - ${{ inputs.wdl }}
     - '-destination'
     - ${{ inputs.destination }}
-    - ${{ inputs.extra_args }}
+    - '-archive'
+    - ${{ inputs.archive }}
+    - '-locked'
+    - ${{ inputs.locked }}
+    - '-streamAllFiles'
+    - ${{ inputs.streamAllFiles }}
   env:
     DX_SECURITY_CONTEXT: '{"auth_token": "${{ inputs.api_token }}", "auth_token_type": "bearer"}'
     DX_APISERVER_PROTOCOL: ${{ inputs.apiserver_protocol }}
