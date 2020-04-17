@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CMD="java -jar /dxWDL.jar $1"
+CMD="java -jar /dxWDL.jar compile $1"
 shift 1
 
 while (( "$#" )); do
