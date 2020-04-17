@@ -1,43 +1,43 @@
-name: dxWDL compile
-author: DNAnexus
-description: Compile a WDL workflow with dxWDL
+name: 'dxWDL compile'
+author: 'DNAnexus'
+description: 'Compile a WDL workflow with dxWDL'
 inputs:
   wdl:
-    description: The main WDL file
+    description: 'The main WDL file'
     required: true
   destination:
-    description: Destination project and folder
+    description: 'Destination project and folder'
     required: true
   archive:
-    description: How to deal with existing workflows/applets (-archive or -force)
+    description: 'How to deal with existing workflows/applets (-archive or -force)'
     required: true
-    default: true
+    default: 'true'
   locked:
-    description: Create a locked workflow
+    description: 'Create a locked workflow'
     required: true
-    default: false
+    default: 'false'
   streamAllFiles:
-    description: Mount all files with dxfuse - do not use the download agent
+    description: 'Mount all files with dxfuse - do not use the download agent'
     required: true
-    default: true
+    default: 'true'
   security_context:
-    description: DNAnexus API token
+    description: 'DNAnexus API token'
     required: true
   apiserver_protocol:
-    description: DNAnexus API server protocol
+    description: 'DNAnexus API server protocol'
     required: true
-    default: https
+    default: 'https'
   apiserver_host:
-    description: DNAnexus API server hostname
+    description: 'DNAnexus API server hostname'
     required: true
-    default: api.dnanexus.com
+    default: 'api.dnanexus.com'
   apiserver_port:
-    description: DNAnexus API server port
+    description: 'DNAnexus API server port'
     required: true
-    default: 443
+    default: '443'
   runs:
-    using: docker
-    image: docker://dnanexus/dxwdl@sha:b475c64898626c681ac81496fe287d9f822f9d27eea448793dfe04f5eca77280
+    using: 'docker'
+    image: 'docker://dnanexus/dxwdl@sha:b475c64898626c681ac81496fe287d9f822f9d27eea448793dfe04f5eca77280'
     args:
       - ${{ inputs.wdl }}
       - '-destination'
