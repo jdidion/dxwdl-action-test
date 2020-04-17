@@ -11,9 +11,13 @@ jobs:
   build:
     name: 'Build Workflow'
     runs-on: 'ubuntu-18.04'
+    outputs:
+      workflow_id: ${{ steps.compile.workflow_id }}
     steps:
-      - uses: 'actions/checkout@v2'
-      - name: 'Compile hello.wdl'
+      - name: 'Checkout repository'
+        uses: 'actions/checkout@v2'
+      - id: 'compile'
+        name: 'Compile hello.wdl'
         uses: 'jdidion/dxwdl-action-test@master'
         with:
           wdl: 'hello.wdl'

@@ -35,6 +35,9 @@ inputs:
     description: 'DNAnexus API server port'
     required: true
     default: '443'
+outputs:
+  workflow_id:
+    description: "The ID of the compiled workflow"
 runs:
   using: 'docker'
   image: 'Dockerfile'

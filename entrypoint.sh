@@ -55,4 +55,5 @@ if [[ -f "extras.json" ]]; then
   CMD="$CMD -extras extras.json"
 fi
 
-eval "$CMD"
+wokflow_id=$(cmd)
+echo ::set-output name=workflow_id::$workflow_id
