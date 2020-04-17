@@ -19,4 +19,3 @@ jobs:
           wdl: hello.wdl
           destination: project-FpGG6G80qpzP2PF4K2B2kzY8:/
           security_context: '{"auth_token": "${{ secrets.API_TOKEN }}", "auth_token_type": "bearer"}'
-

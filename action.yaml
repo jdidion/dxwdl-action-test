@@ -38,11 +38,6 @@ inputs:
   runs:
     using: docker
     image: docker://dnanexus/dxwdl@sha:b475c64898626c681ac81496fe287d9f822f9d27eea448793dfe04f5eca77280
-    env:
-      DX_SECURITY_CONTEXT: '${{ inputs.security_context }}'
-      DX_APISERVER_PROTOCOL: '${{ inputs.apiserver_protocol }}'
-      DX_APISERVER_HOST: '${{ inputs.apiserver_host }}'
-      DX_APISERVER_PORT: '${{ inputs.apiserver_port }}'
     args:
       - '${{ inputs.wdl }}'
       - '-destination'
