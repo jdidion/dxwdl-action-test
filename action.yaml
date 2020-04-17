@@ -20,7 +20,7 @@ inputs:
     description: 'Mount all files with dxfuse - do not use the download agent'
     required: true
     default: 'true'
-  security_context:
+  api_token:
     description: 'DNAnexus API token'
     required: true
   apiserver_protocol:
@@ -35,8 +35,18 @@ inputs:
     description: 'DNAnexus API server port'
     required: true
     default: '443'
-  runs:
-    using: 'docker'
-    image: 'docker://dnanexus/dxwdl@sha:b475c64898626c681ac81496fe287d9f822f9d27eea448793dfe04f5eca77280'
-    args:
-      - ${{ inputs.wdl }}
+runs:
+  using: 'docker'
+  image: 'docker://dnanexus/dxwdl@sha:b475c64898626c681ac81496fe287d9f822f9d27eea448793dfe04f5eca77280'
+  args:
+    - ${{ inputs.wdl }}
+    - '-destination'
+    - ${{ inputs.destination }}
+    - ${{ inputs.archive ? "-archive" | "-f" }}
+    - ${{ inputs.locked ? "-locked" | "" }}
+    - ${{ inputs.streamAllFiles ? "-streamAllFiles" | "" }}
+  env:
+    DX_SECURITY_CONTEXT: '{"auth_token": "${{ inputs.api_token }}", "auth_token_type": "bearer"}'
+    DX_APISERVER_PROTOCOL: ${{ inputs.apiserver_protocol }}
+    DX_APISERVER_HOST: ${{ inputs.apiserver_host }}
+    DX_APISERVER_PORT: ${{ inputs.apiserver_port }}
