@@ -39,9 +39,9 @@ inputs:
     using: docker
     image: docker://dnanexus/dxwdl@sha:b475c64898626c681ac81496fe287d9f822f9d27eea448793dfe04f5eca77280
     args:
-      - '${{ inputs.wdl }}'
+      - ${{ inputs.wdl }}
       - '-destination'
-      - '${{ inputs.destination }}'
-      - '${{ inputs.archive ? "-archive" | "-f" }}'
-      - '${{ inputs.locked ? "-locked" | "" }}'
-      - '${{ inputs.streamAllFiles ? "-streamAllFiles" | "" }}'
+      - ${{ inputs.destination }}
+      - ${{ inputs.archive ? "-archive" | "-f" }}
+      - ${{ inputs.locked ? "-locked" | "" }}
+      - ${{ inputs.streamAllFiles ? "-streamAllFiles" | "" }}
